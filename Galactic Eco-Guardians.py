@@ -131,7 +131,7 @@ def bye():
 def play():
     global player
     status = False # For the checking of player hit
-    
+
     pen = turtle.Turtle() # Score keeper on the top while game is on
     pen.color("white")
     pen.penup()
@@ -157,15 +157,16 @@ def play():
 
     # Game logik
     while True:
-        window.update()
+        window.update() # to change the screen
 
-        for missile in missiles:
+        for missile in missiles: # firing of missiles
             if missile.state == "fire":
                 missile.fd(missile.speed)
                 if missile.xcor() > 300 or missile.xcor() < -300 or missile.ycor() > 300 or missile.ycor() < -300:
                     missile.hideturtle()
                     missile.state = "ready"
-        for enemy in enemies:
+                    
+        for enemy in enemies: # Spawning of enemies
             enemy.fd(enemy.speed)
             for missile in missiles:
                 if enemy.distance(missile) < 20:
@@ -179,11 +180,11 @@ def play():
                     missile.goto(600, 600)
                     missile.hideturtle()
                     missile.state = "ready"
-                    player.score += 10
+                    player.score += 10 # Once the user hits an enemy +10
                     pen.clear()
                     pen.write("Score: {}".format(player.score), False, align="center", font=font_style)
 
-                # I am hit
+                # I am hit / The player is hit
                 if enemy.distance(player) < 20:
                     alien = random.randint(0, 260)
                     distance = random.randint(600, 800)
@@ -191,11 +192,11 @@ def play():
                     enemy.fd(distance)
                     enemy.setheading(anchor(player, enemy))
                     enemy.speed += 0.005
-                    status = True
+                    status = True # the player is now hit
 
-        # Display better luk
+        # Display better luk / Display prompts
         if status:
-            write_pen = pen.clone()
+            write_pen = pen.clone() # pen to write the prompts
 
             write_pen.goto(0, 150)
             write_pen.penup()
