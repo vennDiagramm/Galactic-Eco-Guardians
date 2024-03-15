@@ -129,15 +129,15 @@ def bye():
     turtle.bye()
 
 def play():
+    global player
+    status = False # For the checking of player hit
+    
     pen = turtle.Turtle() # Score keeper on the top while game is on
     pen.color("white")
     pen.penup()
     pen.hideturtle()
     pen.goto(0, 250)
     pen.write("Score: 0", False, align="center", font=font_style)
-
-    global player
-    status = False
 
     # Update screen
     menu.hideturtle()
